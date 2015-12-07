@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @album.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @album.description %>
+</p>
+<% @album.photos.each do |photo| %>
+  <%=image_tag photo.image.thumb%>
+<% end %>
+<div class="upload">
+  <div id="filelist"></div>
+</div>
+<br>
+<a id="pickfiles" href="#">select files</a>
+<a id="uploadfiles" href="#">upload files</a>
+<script>
+$(function(){
+    var uploader = new plupload.Uploader({
+      runtimes : "html5",
+      browse_button : 'pickfiles',
+      max_file_size : '10mb',
+      url : "/upload",
+      multipart: true,
+      urlstream_upload: true,
+      multipart_params: {
+        '<%= request_forgery_protection_token %>': '<%= form_authenticity_token %>',
+        '<%= Rails.application.config.session_options[:key] %>': '<%= request.session_options[:id] %>',
+        'album_id': '<%= @album.id %>'
+      }
+    });
+
+    uploader.bind('FilesAdded', function(up, files) {
+      $.each(files, function(i, file) {
+        $('#filelist').append(
+          '<div id="' + file.id + '">' +
+          'File: ' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
+          '</div>'
+          );
+        });
+      });
+
+    uploader.bind('UploadProgress', function(up, file) {
+      $('#' + file.id + " b").html(file.percent + "%");
+    });
+
+    uploader.bind('FileUploaded', function(up, file) {
+      if(file.name.match(/^\w*-(([a-zA-Z]|)*(_|$))*/)){
+        $('#' + file.id + " b").html("OK");
+      }
+      else{
+        $('#' + file.id + " b").html("<span style='color:red;'>Wrong filename</span>");
+      }
+    });
+
+    $('#uploadfiles').click(function(e) {
+      uploader.start();
+      e.preventDefault();
+    });
+
+    uploader.init();
+  });
+</script>
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', albums_path %>
