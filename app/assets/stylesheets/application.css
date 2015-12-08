@@ -12,5 +12,7 @@
  *
  *= require_tree .
  *= require jquery.plupload.queue
+ *= require bootstrap.min
+ *= require lightgallery
  *= require_self
  */

@@ -12,9 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require moxie
 //= require plupload.dev
 //= require plupload.settings
 //= require jquery.plupload.queue
+//= require bootstrap.min
+//= require lightgallery
 //= require_tree .

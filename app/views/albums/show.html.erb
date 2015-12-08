@@ -1,23 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @album.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @album.description %>
-</p>
-<% @album.photos.each do |photo| %>
-  <%=image_tag photo.image.thumb%>
-<% end %>
-<div class="upload">
-  <div id="filelist"></div>
+<div class="container">
+  <div class="panel panel-default">
+      <div class="panel-heading">
+	<%= @album.name %>
+      </div>
+      <div class="panel-body">
+	<strong>Description:</strong>
+	    <%= @album.description %>
+     	 </div>
+      <div style="margin-left: 10%;margin-right: 10%; margin-bottom: 5%">
+      <div id="lightgallery">
+	<% @album.photos.each do |photo| %>
+	  <%=link_to image_tag(photo.image.thumb), photo.image.to_s %>
+	<% end %>
+      </div>
+      </div>
+    <div class="upload">
+      <div id="filelist"></div>
+    </div>
+    <div class="upload_button" style="padding-left: 40%">
+      <a id="pickfiles" href="#" class="btn btn-info">选择多张图片</a>
+      <a id="uploadfiles" href="#" class="btn btn-warning">上传图片</a>
+    </div>
+    </div>
+  </div>
 </div>
-<br>
-<a id="pickfiles" href="#">select files</a>
-<a id="uploadfiles" href="#">upload files</a>
 <script>
 $(function(){
     var uploader = new plupload.Uploader({
@@ -64,6 +70,11 @@ $(function(){
 
     uploader.init();
   });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#lightgallery").lightGallery(); 
+    });
 </script>
 <%= link_to 'Edit', edit_album_path(@album) %> |
 <%= link_to 'Back', albums_path %>
