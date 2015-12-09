@@ -14,5 +14,6 @@
  *= require jquery.plupload.queue
  *= require bootstrap.min
  *= require lightgallery
+ *= require album
  *= require_self
  */
