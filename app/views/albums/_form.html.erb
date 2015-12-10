@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label "相册名称" %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label "描述" %><br>
     <%= f.text_field :description %>
   </div>
+  <div class="field">
+    <%= f.label "阅览权限" %><br>
+    <%= f.select :locked, {"公开" => false, "非公开" => true } %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

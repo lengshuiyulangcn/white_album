@@ -5,12 +5,20 @@ class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.json
   def index
-    @albums = Album.all
+    if current_user
+      @albums = Album.where(locked: false) + Album.where(user_id: current_user.id)
+    else
+      @albums = Album.where(locked: false) 
+    end
   end
 
   # GET /albums/1
   # GET /albums/1.json
   def show
+    unless  !@album.locked || @album.user == current_user
+      flash[:error]="此相册并未公开"
+      redirect_to :back
+    end
   end
 
   # GET /albums/new
@@ -26,7 +34,7 @@ class AlbumsController < ApplicationController
   # POST /albums.json
   def create
     @album = Album.new(album_params)
-
+    @album.user = current_user 
     respond_to do |format|
       if @album.save
         format.html { redirect_to @album, notice: 'Album was successfully created.' }
@@ -70,10 +78,13 @@ class AlbumsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
-      params.require(:album).permit(:name, :description, :user_id)
+      params.require(:album).permit(:name, :description, :locked)
     end
 
     def is_owner
-      current_user && album.user == current_user
+      unless current_user && @album.user == current_user
+        flash[:error]="没有用户权限"
+        redirect_to :back
+      end
     end
 end
