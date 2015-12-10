@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except:[:index,:show]
 
   # GET /photos
   # GET /photos.json
@@ -41,7 +42,7 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1.json
   def update
     respond_to do |format|
-      if @photo.update(photo_params)
+      if @photo.album.user == current_user && @photo.update(photo_params)
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
         format.json { render :show, status: :ok, location: @photo }
       else
@@ -54,7 +55,7 @@ class PhotosController < ApplicationController
   # DELETE /photos/1
   # DELETE /photos/1.json
   def destroy
-    @photo.destroy
+    @photo.destroy if @photo.album.user == current_user
     respond_to do |format|
       format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
       format.json { head :no_content }
@@ -67,8 +68,9 @@ class PhotosController < ApplicationController
       @photo = Photo.new(image: params[:file])
       parsed = Photo.parse_filename(params[:name])
       @photo.title = parsed[:title]
-      @photo.album_id = params[:album_id] 
-      if @photo.save
+      @photo.album_id = params[:album_id]
+      album = Album.find(params[:album_id])
+      if album && album.user == current_user && @photo.save
 	head 200
       end
   end 

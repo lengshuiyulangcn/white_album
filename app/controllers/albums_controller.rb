@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except:[:index,:show]
+  before_action :is_owner, only:[:edit,:update,:destroy]
   # GET /albums
   # GET /albums.json
   def index
@@ -69,6 +70,10 @@ class AlbumsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
-      params.require(:album).permit(:name, :description)
+      params.require(:album).permit(:name, :description, :user_id)
+    end
+
+    def is_owner
+      current_user && album.user == current_user
     end
 end

@@ -1,11 +1,14 @@
 <div class="container">
   <div class="panel panel-default">
-      <div class="panel-heading">
-	<%= @album.name %>
+      <div class="panel-heading" style="padding: 0">
+        <ol class="breadcrumb">
+          <li><%=link_to "主页", root_path %></li>
+          <li><%=link_to "全部相册", albums_path %></li>
+          <li class="active"><%= @album.name %></li>
+        </ol>
       </div>
       <div class="panel-body">
-	<strong>Description:</strong>
-	    <%= @album.description %>
+        <span style="font-size: 18px"><%= @album.description %></span>
      	 </div>
       <div style="margin-left: 10%;margin-right: 10%; margin-bottom: 5%">
       <div id="lightgallery">
