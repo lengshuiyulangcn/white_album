@@ -1,26 +1,21 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'login'}) do |f| %>
+  <fieldset>
+  	<legend class="legend">登录</legend>
+    
+    <div class="input">
+    	<%= f.email_field :email, placeholder: "Email", required: true, autofocus: true %>
+      <span><i class="fa fa-envelope-o"></i></span>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
+    
+    <div class="input">
+    	<%= f.password_field :password, placeholder: "Password", required: true, autofocus: true %>
+      <span><i class="fa fa-lock"></i></span>
+    </div>
+    
+    <button type="submit" class="submit"><i class="fa fa-long-arrow-right"></i></button>
+    
+  </fieldset>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</div>
+  

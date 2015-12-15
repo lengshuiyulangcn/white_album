@@ -18,4 +18,5 @@
 //= require jquery.plupload.queue
 //= require bootstrap.min
 //= require lightgallery
+//= require white_login
 //= require_tree .

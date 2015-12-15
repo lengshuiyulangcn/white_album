@@ -33,14 +33,18 @@
                 </form>
             </ul>
 	  </li>
-          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <i class="glyphicon glyphicon-chevron-down"></i></a>
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal"></i> </i></a>
             <ul class="dropdown-menu">
-              <li><a href="#" class="">Login</a>
+              <li>
+                <a href="#" class="">新建相册</a>
               </li>
-              <li><a href="#" class="">Profile</a>
+              <li><a href="#" class="">我的相册</a>
               </li>
+              <li><a href="#" class="">相册管理</a>
               <li class="divider"></li>
-              <li><a href="#" class="">About</a>
+	      <li><%=link_to "登录", new_user_session_path, "data-toggle"=>"modal","data-target"=> "#myModal" if !current_user %></li>
+	      <li><%=link_to "注册", new_user_registration_path, "data-toggle"=>"modal","data-target"=> "#myModal" if !current_user %></li>
+              <li><%=link_to "登出", destroy_user_session_path(current_user), method: :delete if current_user %></li>
               </li>
             </ul>
           </li>
@@ -48,3 +52,14 @@
     </div>
   </div>
 </nav>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div>
+<script>
+$('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal');
+});
+</script>

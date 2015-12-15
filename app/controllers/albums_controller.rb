@@ -6,7 +6,7 @@ class AlbumsController < ApplicationController
   # GET /albums.json
   def index
     if current_user
-      @albums = Album.where(locked: false) + Album.where(user_id: current_user.id)
+      @albums = (Album.where(locked: false) + Album.where(user_id: current_user.id)).uniq
     else
       @albums = Album.where(locked: false) 
     end

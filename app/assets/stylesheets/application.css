@@ -15,5 +15,6 @@
  *= require bootstrap.min
  *= require lightgallery
  *= require album
+ *= require white_login
  *= require_self
  */
