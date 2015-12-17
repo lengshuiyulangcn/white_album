@@ -1,0 +1,134 @@
+.topics .topic_line {
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0;
+	margin: 0 -10px;
+	vertical-align: top;
+}
+.topics .topic .avatar {
+	width: 100px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.topics .topic .title {
+	font-size: 14px;
+	margin-top: 2px;
+	margin-bottom: 6px;
+}
+.topics .topic .otherinfo {
+	color: #d0d0d0;
+	margin-bottom: 2px;
+	font-size: 12px;
+}
+.topicbox{
+	background-color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0px 2px rgba(0,0,0,0.07);
+	-moz-box-shadow: 0 0px 2px rgba(0,0,0,0.07);
+	box-shadow: 0 0px 2px rgba(0,0,0,0.07);
+}
+.topic-detail {
+    margin-bottom: 30px
+}
+
+.topic-detail .panel-heading {
+    padding: 15px
+}
+
+.topic-detail .panel-heading h1 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+    text-align: left;
+    line-height: 100%;
+    margin-bottom: 8px
+}
+
+.topic-detail .panel-heading .avatar {
+    text-align: right
+}
+
+.topic-detail .label-awesome {
+    font-size: 13px;
+    background: #FCF8F7;
+    padding: 3px 15px;
+    border-top: 1px solid #eae5e4;
+    color: #aAa5a4
+}
+
+.topic-detail .label-awesome a {
+    color: #aAa5a4
+}
+
+.topic-detail .label-nopoint {
+    font-size: 13px;
+    background: #FCF8E3;
+    padding: 3px 15px;
+    border-top: 1px solid #FAEBCC;
+    color: #ae938B
+}
+
+.topic-detail .label-nopoint a {
+    color: #ae938B
+}
+
+.topic-detail .info {
+    color: #c0c0c0;
+    font-size: 12px
+}
+
+.topic-detail .info a {
+    color: #444
+}
+
+.topic-detail .info .node {
+    padding: 1px 0px;
+    color: #778087;
+    text-decoration: none;
+    background-color: #f5f5f5
+}
+
+.topic-detail .info em {
+    font-style: normal
+}
+
+.topic-detail .info .opts a {
+    margin-left: 5px;
+    color: #999
+}
+
+.topic-detail .info .opts a:hover {
+    color: #333
+}
+
+.reply {
+	border-bottom: 1px solid #DDD;
+	padding: 8px 10px;
+	margin: 0 -10px;
+	background: #FFF;
+}
+.reply .face {
+	padding-right: 8px;
+	width: 48px;
+	margin-left: 0;
+}
+.reply .info {
+	font-size: 12px;
+	color: #bbb;
+	height: 20px;
+}
+.reply .infos {
+	padding-left: 58px;
+}
+.reply .body {
+	text-align: left;
+	margin-top: 5px;
+}
+.panel-body img {
+   display: block;
+   max-height: 200px;
+}

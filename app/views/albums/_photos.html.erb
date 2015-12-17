@@ -1,0 +1,23 @@
+<div class="topicbox">
+<%@photos.each do |photo|%>
+  <div class="topics">
+    <div class="topic topic_line">
+      <div class="pull-left avatar">
+        <%=image_tag(photo.image.thumb)%>	
+      </div>
+      <div class="title"><%=photo.title%></div>
+        <div class="pull-right">
+           <%= link_to '编辑', edit_photo_path(photo) %>
+           <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, style: "color: red" %>
+         </div>
+         <div class="otherinfo">
+           Path: <%=photo.image%>
+	 </div>
+      </div>
+  </div>
+<%end%>
+    <div class="flickr_pagination">
+    </div>
+</div>
+
+<%= link_to 'New Photo', new_photo_path %>

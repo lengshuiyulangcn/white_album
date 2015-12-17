@@ -18,10 +18,11 @@ body {
 .login {
   position: relative;
   top: 50%;
-  width: 100%;
-  display: table;
+  width: 50%;
+  margin-left: 25%;
   background: #fff;
   border-radius: 4px;
+  background-color: #eee;
 }
 .legend {
   position: relative;
