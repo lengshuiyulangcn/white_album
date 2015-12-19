@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'albums/my' => 'albums#my', as: :my_album
   resources :albums
   resources :photos
   get '/upload_photos' => 'photos#upload_photos', as: :upload_photos

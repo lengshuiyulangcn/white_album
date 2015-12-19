@@ -19,5 +19,57 @@
     <div class="flickr_pagination">
     </div>
 </div>
+<div class="upload">
+  <div id="filelist"></div>
+</div>
+<div class="upload_button" style="padding-left: 40%">
+  <a id="pickfiles" href="#" class="btn btn-info">选择多张图片</a>
+  <a id="uploadfiles" href="#" class="btn btn-warning">上传图片</a>
+</div>
+<script>
+$(function(){
+    var uploader = new plupload.Uploader({
+      runtimes : "html5",
+      browse_button : 'pickfiles',
+      max_file_size : '10mb',
+      url : "/upload",
+      multipart: true,
+      urlstream_upload: true,
+      multipart_params: {
+        '<%= request_forgery_protection_token %>': '<%= form_authenticity_token %>',
+        '<%= Rails.application.config.session_options[:key] %>': '<%= request.session_options[:id] %>',
+        'album_id': '<%= @album.id %>'
+      }
+    });
 
-<%= link_to 'New Photo', new_photo_path %>
+    uploader.bind('FilesAdded', function(up, files) {
+      $.each(files, function(i, file) {
+        $('#filelist').append(
+          '<div id="' + file.id + '">' +
+          'File: ' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
+          '</div>'
+          );
+        });
+      });
+
+    uploader.bind('UploadProgress', function(up, file) {
+      $('#' + file.id + " b").html(file.percent + "%");
+    });
+
+    uploader.bind('FileUploaded', function(up, file) {
+      if(file.name.match(/^\w*-(([a-zA-Z]|)*(_|$))*/)){
+        $('#' + file.id + " b").html("OK");
+      }
+      else{
+        $('#' + file.id + " b").html("<span style='color:red;'>Wrong filename</span>");
+      }
+    });
+
+    $('#uploadfiles').click(function(e) {
+      uploader.start();
+      e.preventDefault();
+    });
+
+    uploader.init();
+  });
+</script>

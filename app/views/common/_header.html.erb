@@ -37,11 +37,11 @@
             <ul class="dropdown-menu">
               <% if current_user %>
                 <li>
-                  <a href="#" class="">新建相册</a>
+                  <%=link_to "新建相册", new_album_path %>
                 </li>
-                <li><a href="#" class="">我的相册</a>
+                <li>
+                  <%=link_to "管理相册", my_album_path %>
                 </li>
-                <li><a href="#" class="">相册管理</a>
               <li class="divider"></li>
               <% end %>
 	      <li><%=link_to "登录", new_user_session_path if !current_user %></li>

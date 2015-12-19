@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center text-primary title">所有相册</h1>
+  <h1 class="text-center text-primary title">管理我的相册</h1>
     <hr class="divider-title">
     <div class="row">
       <% @albums.each do |album| %>
@@ -7,9 +7,9 @@
             <div class="project">
               <figure class="img-responsive">
                 <% unless album.photos.empty? %>
-                  <%=link_to image_tag(album.photos.first.image.thumb), album%>
+                  <%=link_to image_tag(album.photos.first.image.thumb), album_path(album)%>
                 <% else %>
-                  <%=link_to image_tag("/no_image.png"), album%>
+                  <%=link_to image_tag("/no_image.png"), album_path(album)%>
                 <% end %>
                     <figcaption>
                     <span class="project-details"><%= album.name %>
@@ -20,7 +20,11 @@
                     <span class="project-price"><strong><%=album.photos.length%></strong></span>
                     <span class="project-creator"><%= album.description %></span>
                     </figcaption>
-                </figure>
+                    <div class="pull-right">
+                      <%=link_to "编辑", edit_album_path(album)%>
+                      <%=link_to "删除", album_path(album), method: "delete", style: "color: red", data: { confirm: '确定删除该相册?' }%>
+                    </div>
+              </figure>
             </div>
         </div>
       <% end %>
