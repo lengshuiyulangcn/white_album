@@ -13,13 +13,31 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :image %><br>
-    <%= f.file_field :image %>
+    <%= f.file_field :image, id: "eyecatch_upload", onchange: "previewFile()" %><br />
+    <img id="eyecatch_url" src= "<%=@photo.image%>" style="width: 140px; height: 140px;"/>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "提交", class:"btn btn-info" %>
   </div>
 <% end %>
+
+<script>
+function previewFile() {
+  var preview = document.getElementById('eyecatch_url');
+  var file    = document.getElementById('eyecatch_upload').files[0];
+  var reader  = new FileReader();
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+</script>
+

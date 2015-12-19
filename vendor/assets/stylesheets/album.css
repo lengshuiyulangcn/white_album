@@ -6,8 +6,12 @@ body{
 
 .divider-title{
     border:1px solid #dddddd;
+    margin-top: 20px;
 }
 
+.pagination{
+  margin: 0
+}
 .project {
     margin-bottom: 30px;
     vertical-align: top;
@@ -180,7 +184,7 @@ body {
 }
 
 a,a:hover {
-	color:#77CCDD;
+	//color:#77CCDD;
   	text-decoration:none;
 }
 

@@ -8,22 +8,41 @@
         </ol>
       </div>
       <div class="panel-body">
-        <span style="font-size: 18px"><%= @album.description %></span>
-     	 </div>
-      <div style="margin-left: 10%;margin-right: 10%; margin-bottom: 5%">
-      <div id="lightgallery">
-	<% @album.photos.each do |photo| %>
-	  <%=link_to image_tag(photo.image.thumb), photo.image.to_s %>
-	<% end %>
-      </div>
+        <div class="margin-left: 20%; marigin-right: 20%">
+          <span style="font-size: 18px"><%= @album.description %></span>
+         </div>
+     </div>
+      <div id="gallery">
+	<div class="body">
+	</div>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#lightgallery").lightGallery(); 
+  $(document).ready(function(){
+    PhotoWall.init({
+        el:             '#gallery'               // Gallery element
+        ,zoom:          true                     // Use zoom
+        ,zoomAction:    'mouseenter'             // Zoom on action
+        ,zoomTimeout:   500                      // Timeout before zoom
+        ,zoomDuration:  100                      // Zoom duration time
+        ,showBox:       true                     // Enavle fullscreen mode
+        ,showBoxSocial: true                     // Show social buttons
+        ,padding:       5                       // padding between images in gallery
+        ,lineMaxHeight: 150                      // Max set height of pictures line
+                                                 // (may be little bigger due to resize to fit line)
+    });
+   var PhotosArray = new Array(
+       <% @album.photos.each_with_index do |photo,index|%>
+	 {id: <%=photo.id%>,img:'<%=photo.image.url%>',width:500,height:400,
+	   th:{src:'<%=photo.image.thumb.url%>',width:50,height:40,
+	     zoom_src:'<%=photo.image.url%>',zoom_factor:4
+            }
+	 }<%= "," unless index == @album.photos.length-1 %>
+      <%end%>
+    );
+
+    PhotoWall.load(PhotosArray);
     });
 </script>
-<%= link_to 'Edit', edit_album_path(@album) %> |
-<%= link_to 'Back', albums_path %>

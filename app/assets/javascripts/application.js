@@ -19,4 +19,5 @@
 //= require bootstrap.min
 //= require lightgallery
 //= require white_login
+//= require jquery-photowall
 //= require_tree .

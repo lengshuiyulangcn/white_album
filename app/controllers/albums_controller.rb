@@ -6,9 +6,10 @@ class AlbumsController < ApplicationController
   # GET /albums.json
   def index
     if current_user
-      @albums = (Album.where(locked: false) + Album.where(user_id: current_user.id)).uniq
+      @albums = Album.where("locked = ? or user_id = ?", false, current_user.id).page(params.permit(:page)[:page])
+      
     else
-      @albums = Album.where(locked: false) 
+      @albums = Album.where(locked: false).page(params.permit(:page)[:page]) 
     end
   end
 
@@ -27,12 +28,12 @@ class AlbumsController < ApplicationController
   end
   
   def my
-    @albums = current_user.albums
+    @albums = current_user.albums.page(params.permit(:page)[:page])
   end
 
   # GET /albums/1/edit
   def edit
-    @photos = @album.photos
+    @photos = @album.photos.page(params.permit(:page)[:page])
   end
 
   # POST /albums

@@ -17,5 +17,6 @@
  *= require album
  *= require white_login
  *= require topic 
+ *= require jquery-photowall  
  *= require_self
  */

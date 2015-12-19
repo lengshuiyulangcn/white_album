@@ -46,7 +46,7 @@
               <% end %>
 	      <li><%=link_to "登录", new_user_session_path if !current_user %></li>
 	      <li><%=link_to "注册", new_user_registration_path if !current_user %></li>
-              <li><%=link_to "登出", destroy_user_session_path(current_user), method: :delete if current_user %></li>
+              <li><%=link_to "登出", destroy_user_session_path, method: :delete if current_user %></li>
               </li>
             </ul>
           </li>

@@ -1,4 +1,5 @@
 <div class="topicbox">
+  <%= will_paginate @photos %>
 <%@photos.each do |photo|%>
   <div class="topics">
     <div class="topic topic_line">
@@ -11,7 +12,7 @@
            <%= link_to '删除', photo, method: :delete, data: { confirm: 'Are you sure?' }, style: "color: red" %>
          </div>
          <div class="otherinfo">
-           Path: <%=photo.image%>
+           Path: <%= root_url+photo.image.url[1..-1]%>
 	 </div>
       </div>
   </div>
