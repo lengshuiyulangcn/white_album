@@ -5,8 +5,8 @@ class Photo < ActiveRecord::Base
   self.per_page = 10
 
   def self.parse_filename(filename)
-    filename.gsub!(/(.jpg|.png)/, '')
-    return nil unless filename =~ /^\w*-(([a-zA-Z])*(_|$))*/
+    filename.gsub!(/(.jpg|.png|.jpeg)/, '')
+    return {title: "no_name"} unless filename =~ /^\w*-(([a-zA-Z])*(_|$))*/
     filename.split('_').join(' ')
     {title: filename}
   end
